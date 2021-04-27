@@ -1,7 +1,9 @@
 import { forwardRef, PropsWithoutRef } from "react"
 import { useField } from "react-final-form"
+import { Grid, TextField, TextFieldProps, Box } from "@material-ui/core"
+import { Alert } from "@material-ui/lab"
 
-export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElements["input"]> {
+export interface LabeledTextFieldProps extends PropsWithoutRef<TextFieldProps> {
   /** Field name. */
   name: string
   /** Field label. */
@@ -11,7 +13,7 @@ export interface LabeledTextFieldProps extends PropsWithoutRef<JSX.IntrinsicElem
   outerProps?: PropsWithoutRef<JSX.IntrinsicElements["div"]>
 }
 
-export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldProps>(
+export const LabeledTextField = forwardRef<TextFieldProps, LabeledTextFieldProps>(
   ({ name, label, outerProps, ...props }, ref) => {
     const {
       input,
@@ -23,35 +25,24 @@ export const LabeledTextField = forwardRef<HTMLInputElement, LabeledTextFieldPro
     const normalizedError = Array.isArray(error) ? error.join(", ") : error || submitError
 
     return (
-      <div {...outerProps}>
-        <label>
-          {label}
-          <input {...input} disabled={submitting} {...props} ref={ref} />
-        </label>
+      <Grid item xs={12}>
+        <Box {...outerProps}>
+          <TextField
+            fullWidth
+            label={label}
+            {...input}
+            disabled={submitting}
+            {...props}
+          // ref={ref}
+          />
 
-        {touched && normalizedError && (
-          <div role="alert" style={{ color: "red" }}>
-            {normalizedError}
-          </div>
-        )}
-
-        <style jsx>{`
-          label {
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-            font-size: 1rem;
-          }
-          input {
-            font-size: 1rem;
-            padding: 0.25rem 0.5rem;
-            border-radius: 3px;
-            border: 1px solid purple;
-            appearance: none;
-            margin-top: 0.5rem;
-          }
-        `}</style>
-      </div>
+          {touched && normalizedError && (
+            <Alert severity="error" role="alert" style={{ color: "red" }}>
+              {normalizedError}
+            </Alert>
+          )}
+        </Box>
+      </Grid>
     )
   }
 )

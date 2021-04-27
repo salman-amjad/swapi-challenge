@@ -2,6 +2,8 @@ import { ReactNode, PropsWithoutRef } from "react"
 import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
 import * as z from "zod"
 export { FORM_ERROR } from "final-form"
+import { Button, Grid } from "@material-ui/core"
+import { Alert } from "@material-ui/lab"
 
 export interface FormProps<S extends z.ZodType<any, any>>
   extends Omit<PropsWithoutRef<JSX.IntrinsicElements["form"]>, "onSubmit"> {
@@ -36,26 +38,26 @@ export function Form<S extends z.ZodType<any, any>>({
       onSubmit={onSubmit}
       render={({ handleSubmit, submitting, submitError }) => (
         <form onSubmit={handleSubmit} className="form" {...props}>
-          {/* Form fields supplied as children are rendered here */}
-          {children}
+          <Grid container spacing={2}>
+            {/* Form fields supplied as children are rendered here */}
+            {children}
 
-          {submitError && (
-            <div role="alert" style={{ color: "red" }}>
-              {submitError}
-            </div>
-          )}
+            {submitText && (
+              <Grid item xs={12} style={{ marginTop: "10px" }}>
+                <Button variant="contained" color="primary" type="submit" disabled={submitting}>
+                  {submitText}
+                </Button>
+              </Grid>
+            )}
 
-          {submitText && (
-            <button type="submit" disabled={submitting}>
-              {submitText}
-            </button>
-          )}
-
-          <style global jsx>{`
-            .form > * + * {
-              margin-top: 1rem;
-            }
-          `}</style>
+            {submitError && (
+              <Grid item xs={12} style={{ marginTop: "10px" }}>
+                <Alert severity="error" role="alert">
+                  {submitError}
+                </Alert>
+              </Grid>
+            )}
+          </Grid>
         </form>
       )}
     />

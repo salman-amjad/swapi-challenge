@@ -1,5 +1,6 @@
 import { BlitzPage, useMutation } from "blitz"
-import Layout from "app/core/layouts/Layout"
+import { Typography, Grid, Box, Button } from "@material-ui/core"
+import { AuthLayout } from "app/core/layouts/Auth"
 import { LabeledTextField } from "app/core/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/core/components/Form"
 import { ForgotPassword } from "app/auth/validations"
@@ -10,7 +11,9 @@ const ForgotPasswordPage: BlitzPage = () => {
 
   return (
     <div>
-      <h1>Forgot your password?</h1>
+      <Typography variant="h4">
+        Forgot your password?
+      </Typography>
 
       {isSuccess ? (
         <div>
@@ -22,7 +25,7 @@ const ForgotPasswordPage: BlitzPage = () => {
         </div>
       ) : (
         <Form
-          submitText="Send Reset Password Instructions"
+          submitText="Reset Password"
           schema={ForgotPassword}
           initialValues={{ email: "" }}
           onSubmit={async (values) => {
@@ -43,6 +46,6 @@ const ForgotPasswordPage: BlitzPage = () => {
 }
 
 ForgotPasswordPage.redirectAuthenticatedTo = "/"
-ForgotPasswordPage.getLayout = (page) => <Layout title="Forgot Your Password?">{page}</Layout>
+ForgotPasswordPage.getLayout = (page) => <AuthLayout title="Forgot Your Password?">{page}</AuthLayout>
 
 export default ForgotPasswordPage
