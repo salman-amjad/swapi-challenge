@@ -1,4 +1,5 @@
 import { ReactNode, PropsWithoutRef } from "react"
+import { Link, WithRouterProps } from "blitz"
 import { Form as FinalForm, FormProps as FinalFormProps } from "react-final-form"
 import * as z from "zod"
 export { FORM_ERROR } from "final-form"
@@ -11,6 +12,8 @@ export interface FormProps<S extends z.ZodType<any, any>>
   children?: ReactNode
   /** Text to display in the submit button */
   submitText?: string
+  secondaryButtonText?: string;
+  secondaryButtonRoute?: any;
   schema?: S
   onSubmit: FinalFormProps<z.infer<S>>["onSubmit"]
   initialValues?: FinalFormProps<z.infer<S>>["initialValues"]
@@ -22,6 +25,8 @@ export function Form<S extends z.ZodType<any, any>>({
   schema,
   initialValues,
   onSubmit,
+  secondaryButtonText,
+  secondaryButtonRoute,
   ...props
 }: FormProps<S>) {
   return (
@@ -43,10 +48,27 @@ export function Form<S extends z.ZodType<any, any>>({
             {children}
 
             {submitText && (
-              <Grid item xs={12} style={{ marginTop: "10px" }}>
-                <Button variant="contained" color="primary" type="submit" disabled={submitting}>
+              <Grid item xs={12} style={{ marginTop: "6px" }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  disabled={submitting}
+                >
                   {submitText}
                 </Button>
+
+                {secondaryButtonText && (
+                  <Link href={secondaryButtonRoute}>
+                    <Button
+                      variant="text"
+                      color="default"
+                      style={{ marginLeft: "10px" }}
+                    >
+                      {secondaryButtonText}
+                    </Button>
+                  </Link>
+                )}
               </Grid>
             )}
 

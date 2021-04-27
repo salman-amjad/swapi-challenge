@@ -1,4 +1,5 @@
-import { useMutation } from "blitz"
+import { useMutation, Link, Routes } from "blitz"
+import { Grid, Button } from "@material-ui/core"
 import { LabeledTextField } from "app/core/components/LabeledTextField"
 import { Form, FORM_ERROR } from "app/core/components/Form"
 import signup from "app/auth/mutations/signup"
@@ -17,6 +18,8 @@ export const SignupForm = (props: SignupFormProps) => {
 
       <Form
         submitText="Create Account"
+        secondaryButtonText="Login"
+        secondaryButtonRoute={Routes.LoginPage()}
         schema={Signup}
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values) => {

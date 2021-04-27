@@ -1,4 +1,4 @@
-import { BlitzPage, useMutation } from "blitz"
+import { BlitzPage, useMutation, Routes } from "blitz"
 import { Typography, Grid, Box, Button } from "@material-ui/core"
 import { AuthLayout } from "app/core/layouts/Auth"
 import { LabeledTextField } from "app/core/components/LabeledTextField"
@@ -26,6 +26,8 @@ const ForgotPasswordPage: BlitzPage = () => {
       ) : (
         <Form
           submitText="Reset Password"
+          secondaryButtonText="Login"
+          secondaryButtonRoute={Routes.LoginPage()}
           schema={ForgotPassword}
           initialValues={{ email: "" }}
           onSubmit={async (values) => {
