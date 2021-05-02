@@ -1,7 +1,7 @@
 import { ReactNode } from "react"
-import { Head } from "./components/Head"
-import { Card, Grid, makeStyles } from "@material-ui/core"
-import { useStyles } from "./components/styles"
+import { Head } from "../components/Head"
+import { Card, Grid } from "@material-ui/core"
+import { useStyles } from "../components/styles"
 
 type LayoutProps = {
   title?: string

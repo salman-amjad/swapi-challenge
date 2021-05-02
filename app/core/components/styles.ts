@@ -8,7 +8,7 @@ export const useStyles = makeStyles({
     padding: "30px 20px"
   },
   appBar: {
-    padding: "5px 10px"
+    padding: "5px 0"
   },
   search: {
     maxWidth: "500px"
@@ -29,13 +29,9 @@ export const useStyles = makeStyles({
     "& input": {
       padding: "10px 20px",
       color: "#FFF",
-
-      "&::before": {
-        display: "none"
-      }
     }
   },
   searchIcon: {
-    // padding: "10px 0"
+    padding: "10px 0"
   }
 })

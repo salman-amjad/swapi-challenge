@@ -1,18 +1,21 @@
-import { ReactNode } from "react"
-import { Head, Header } from "./components"
+import { FC, ReactNode } from "react"
+import { Container } from "@material-ui/core"
+import { Head, Header } from "../components"
 
-
-type LayoutProps = {
+interface IProps {
   title?: string
-  children: ReactNode
 }
 
-const Layout = ({ title, children }: LayoutProps) => {
+const Layout: FC<IProps> = ({ title, children }) => {
   return (
     <>
       <Head title={title || "providers-choice-challenge"} />
       <Header />
-      {children}
+      <Container fixed style={{ paddingTop: "80px" }}>
+        <>
+          {children}
+        </>
+      </Container>
     </>
   )
 }
