@@ -8,19 +8,18 @@ import {
   useQueryErrorResetBoundary,
 } from "blitz"
 import { ErrorBoundary } from "react-error-boundary"
+import CssBaseline from "@material-ui/core/CssBaseline"
+import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles"
+import React from "react"
 import { ApolloProvider } from "@apollo/client"
 
 import ApolloClient from "../core/graphql"
 import LoginForm from "app/auth/components/LoginForm"
 
-import CssBaseline from "@material-ui/core/CssBaseline";
-import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import React from "react";
-
 //You can customize this as you want and even move it out to a separate file
 const theme = createMuiTheme({
   palette: {
-    type: "light"
+    type: "dark"
   }
 });
 
