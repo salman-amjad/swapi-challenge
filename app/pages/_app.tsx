@@ -8,6 +8,9 @@ import {
   useQueryErrorResetBoundary,
 } from "blitz"
 import { ErrorBoundary } from "react-error-boundary"
+import { ApolloProvider } from "@apollo/client"
+
+import ApolloClient from "../core/graphql"
 import LoginForm from "app/auth/components/LoginForm"
 
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -28,13 +31,15 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <ErrorBoundary
-        FallbackComponent={RootErrorFallback}
-        resetKeys={[router.asPath]}
-        onReset={useQueryErrorResetBoundary().reset}
-      >
-        {getLayout(<Component {...pageProps} />)}
-      </ErrorBoundary>
+      <ApolloProvider client={ApolloClient}>
+        <ErrorBoundary
+          FallbackComponent={RootErrorFallback}
+          resetKeys={[router.asPath]}
+          onReset={useQueryErrorResetBoundary().reset}
+        >
+          {getLayout(<Component {...pageProps} />)}
+        </ErrorBoundary>
+      </ApolloProvider>
     </ThemeProvider>
   );
 }
