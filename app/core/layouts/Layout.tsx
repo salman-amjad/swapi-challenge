@@ -2,11 +2,11 @@ import { FC, ReactNode } from "react"
 import { Container } from "@material-ui/core"
 import { Head, Header } from "../components"
 
-interface IProps {
+interface ComponentProps {
   title?: string
 }
 
-const Layout: FC<IProps> = ({ title, children }) => {
+const Layout: FC<ComponentProps> = ({ title, children }) => {
   return (
     <>
       <Head title={title || "providers-choice-challenge"} />

@@ -1,11 +1,11 @@
 import { FC } from "react"
 import { Head as BlitzHead } from "blitz"
 
-interface IProps {
+interface ComponentProps {
   title: string;
 }
 
-export const Head: FC<IProps> = ({ title }) => (
+export const Head: FC<ComponentProps> = ({ title }) => (
   <>
     <BlitzHead>
       <title>{title || "providers-choice-challenge"}</title>

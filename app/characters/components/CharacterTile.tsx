@@ -6,12 +6,12 @@ import toggleFavorite from "app/characters/mutations/toggleFavorite"
 import { useStyles } from "./styles"
 import { FC, useState } from "react"
 
-interface IProps {
+interface ComponentProps {
   character: Person;
   inFavorites: boolean;
 }
 
-export const CharacterTile: FC<IProps> = ({ character, inFavorites }) => {
+export const CharacterTile: FC<ComponentProps> = ({ character, inFavorites }) => {
   const [toggleFavoriteMutation] = useMutation(toggleFavorite)
   const [inFavorite, setInFavorite] = useState(inFavorites)
   const classes = useStyles()
