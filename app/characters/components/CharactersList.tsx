@@ -12,6 +12,7 @@ interface AllPeople extends Pick<Root, "allPeople"> { }
 
 interface ComponentProps {
   searchQuery?: string;
+  sortOrder?: SortableAttributes;
 }
 const GET_CHARACTERS = gql`
   query GetPeople {
@@ -40,6 +41,9 @@ export const CharactersList: FC<ComponentProps> = ({ searchQuery, sortOrder, fil
 
     // Filters characters using search query
     if (!!searchQuery) characters = filterCharactersByName(searchQuery, characters)
+
+    // Apply sort order
+    if (!!sortOrder) characters = sortCharactersByAttribute(sortOrder, characters)
   }
 
   return (
