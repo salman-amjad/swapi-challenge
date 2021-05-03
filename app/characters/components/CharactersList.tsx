@@ -5,6 +5,7 @@ import { useQuery as blitzUseQuery } from "blitz"
 
 import { Root, RootAllPeopleArgs, Person } from "graphql/models"
 import { CharacterTile } from "app/characters/components/CharacterTile"
+import { FiltersChangeType } from "app/characters/components/FiltersDrawer"
 import getFavorites from "app/users/queries/getFavorites"
 import { filterCharactersByName, sortCharactersByAttribute, SortableAttributes, filterCharactersByAttribute } from "app/core/utils"
 
@@ -13,7 +14,9 @@ interface AllPeople extends Pick<Root, "allPeople"> { }
 interface ComponentProps {
   searchQuery?: string;
   sortOrder?: SortableAttributes;
+  filters: FiltersChangeType
 }
+
 const GET_CHARACTERS = gql`
   query GetPeople {
     allPeople {
@@ -21,9 +24,18 @@ const GET_CHARACTERS = gql`
           id
           name
           gender
+          height
           homeworld {
               id
               name
+          }
+          filmConnection {
+            films {
+              id
+            }
+          }
+          species {
+            id
           }
       }
     }
@@ -44,6 +56,11 @@ export const CharactersList: FC<ComponentProps> = ({ searchQuery, sortOrder, fil
 
     // Apply sort order
     if (!!sortOrder) characters = sortCharactersByAttribute(sortOrder, characters)
+
+    // Apply all filters
+    if (!!filters.films.length) characters = filterCharactersByAttribute("films", filters.films, characters)
+    if (!!filters.planets.length) characters = filterCharactersByAttribute("planets", filters.planets, characters)
+    if (!!filters.species.length) characters = filterCharactersByAttribute("species", filters.species, characters)
   }
 
   return (

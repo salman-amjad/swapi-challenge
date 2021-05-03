@@ -14,6 +14,7 @@ export const useStyles = makeStyles({
     opacity: 0,
     background: "rgb(255,255,255)",
     transition: "all 0.5s ease-in-out",
+    fontSize: 0,
 
     "&:hover": {
       opacity: 0.1,
@@ -28,5 +29,9 @@ export const useStyles = makeStyles({
     "&.active": {
       color: "red"
     }
+  },
+  filtersWrapper: {
+    padding: "20px",
+    maxWidth: "500px"
   }
 })

@@ -1,13 +1,21 @@
 import { ChangeEvent, Suspense, useState } from "react"
 import { BlitzPage, Routes, useRouterQuery } from "blitz"
-import { Box, Grid, Typography, Select, MenuItem } from "@material-ui/core"
+import { Box, Grid, Typography, Select, MenuItem, IconButton } from "@material-ui/core"
+import { FilterList } from "@material-ui/icons"
 import Layout from "app/core/layouts/Layout"
-import { CharactersList } from "app/characters/components/CharactersList"
+import { CharactersList, FiltersDrawer, FiltersChangeType } from "app/characters/components"
 import { SortableAttributes } from "app/core/utils"
 
 const Home: BlitzPage = () => {
   const { q: searchQuery } = useRouterQuery()
   const [sortBy, setSortBy] = useState("default")
+  const [isDrawerOpen, toggleDrawer] = useState(false)
+  const [filters, setFilters] = useState<FiltersChangeType>({ films: [], planets: [], species: [] })
+
+  const onChangeSortOrder = (event: ChangeEvent<HTMLSelectElement>) => {
+    setSortBy(event.target.value)
+  }
+
   return (
     <Box>
       <Grid container>
@@ -30,10 +38,17 @@ const Home: BlitzPage = () => {
         </Grid>
       </Grid>
 
+      <FiltersDrawer
+        isOpen={isDrawerOpen}
+        onClose={() => toggleDrawer(false)}
+        onChange={filters => setFilters(filters)}
+      />
+
       <Suspense fallback="Loading...">
         <CharactersList
           searchQuery={searchQuery as string}
           sortOrder={sortBy as SortableAttributes}
+          filters={filters}
         />
       </Suspense>
     </Box>
