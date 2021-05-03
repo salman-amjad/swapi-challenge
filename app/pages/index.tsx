@@ -5,6 +5,7 @@ import Layout from "app/core/layouts/Layout"
 import { CharactersList } from "app/characters/components/CharactersList"
 
 const Home: BlitzPage = () => {
+  const { q: searchQuery } = useRouterQuery()
   return (
     <Box>
       <Grid container>
