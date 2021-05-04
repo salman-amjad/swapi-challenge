@@ -1,4 +1,4 @@
-import { useMutation, useRouter } from "blitz"
+import { Routes, useMutation, useRouter } from "blitz"
 import { AppBar, Toolbar, Typography, InputBase, Box, Button, Container } from "@material-ui/core"
 import { Search as SearchIcon } from "@material-ui/icons"
 import logout from "app/auth/mutations/logout"
@@ -14,7 +14,12 @@ export function Header() {
   const [searchText, setSearchText] = useState("")
 
   const onLogout = async () => {
-    await logoutMutation()
+    try {
+      await logoutMutation()
+    } catch (err) {
+      console.error(err)
+    }
+    router.replace(Routes.LoginPage().pathname)
   }
 
   const onFormSubmit = (event: FormEvent) => {
