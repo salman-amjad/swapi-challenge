@@ -62,20 +62,10 @@ yarn test
 
 Blitz comes with a test setup using [Jest](https://jestjs.io/) and [react-testing-library](https://testing-library.com/).
 
-## Commands
 
-Blitz comes with a powerful CLI that is designed to make development easy and fast. You can install it with `npm i -g blitz`
-
-```
-  blitz [COMMAND]
-
-  dev       Start a development server
-  build     Create a production build
-  start     Start a production server
-  export    Export your Blitz app as a static application
-  prisma    Run prisma commands
-  generate  Generate new files for your Blitz project
-  console   Run the Blitz console REPL
-  install   Install a recipe
-  help      Display help for blitz
-  test      Run project tests
+## Some Enhancements / TODO
+- Add more unit tests
+- Save sorting / filters to session storage or DB
+- Refactor filters state
+- Add similar characters to individual character page
+- Update preloader / pre-fetch some data
