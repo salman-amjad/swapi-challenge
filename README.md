@@ -20,13 +20,13 @@ npm install
 
 Start the server
 ```
-export PORT=3333; yarn start
+export PORT=3500; yarn start
 ```
 
 or
 
 ```
-export PORT=3333; npm run start
+export PORT=3500; npm run start
 ```
 
 
